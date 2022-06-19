@@ -12,18 +12,25 @@ body {
 }
 
 #p_info_container,
-#ed_exp_container {
+#ed_exp_container,
+#pract_exp_container {
     display: flex;
     flex-flow: column nowrap;
     gap: 20px;
 }
 
-#ed_exp_container {
+#ed_exp_container,
+#pract_exp_container {
     margin-top: 20px;
 }
 
+#pract_exp_container {
+    margin-bottom: 20px;
+}
+
 #p_info_container > h1,
-#ed_exp_container > h1 {
+#ed_exp_container > h1,
+#pract_exp_container > h1 {
     align-self: center;
     justify-self: center;
     color: mistyrose;
