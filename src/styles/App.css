@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+body {
+    max-width: 80%;
+    margin: 0 auto;
+    background: #280828;
+}
+
+#p_info_container {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 20px;
+}
+
+#p_info_container > h1 {
+    align-self: center;
+    justify-self: center;
+    color: mistyrose;
+    font-size: 2rem;
+}
+
+.user_personal_info {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 10px;
+}
+
+#user_intro {
+    resize: none;
+}
