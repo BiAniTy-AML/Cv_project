@@ -10,8 +10,10 @@ class App extends Component {
         super();
 
         this.handle_input = this.handle_input.bind(this);
+        this.confirm_data = this.confirm_data.bind(this);
 
         this.state = {
+            errors: {},
             personal_info: {
                 first_name: "",
                 last_name: "",
@@ -48,22 +50,55 @@ class App extends Component {
         });
     }
 
+    confirm_data(e) {
+        e.preventDefault();
+
+        const p_info = this.state.personal_info;
+        const ed_exp = this.state.educational_exp;
+        const pra_exp = this.state.practical_exp;
+
+        let errors = {};
+        let is_valid = true;
+
+        for (const field in p_info) {
+            if (!p_info[field].trim()) {
+                is_valid = false;
+                errors[field] = "*This field must be filled";
+            }
+        }
+
+        this.setState({
+            errors,
+        });
+
+        if (is_valid) {
+            console.log("congrats!!!");
+        }
+    }
+
     render() {
         return (
             <div>
                 <PersonalInfo
                     handle_input={this.handle_input}
                     fields={this.state.personal_info}
+                    errors={this.state.errors}
                 />
                 <EducationalExp
                     handle_input={this.handle_input}
                     fields={this.state.educational_exp}
+                    errors={this.state.errors}
                 />
                 <PracticalExp
                     handle_input={this.handle_input}
                     fields={this.state.practical_exp}
+                    errors={this.state.errors}
                 />
-                <button type="submit" className="submit_btn" onClick={() => {}}>
+                <button
+                    type="submit"
+                    className="submit_btn"
+                    onClick={this.confirm_data}
+                >
                     Confirm
                 </button>
             </div>

@@ -6,7 +6,7 @@ class PersonalInfo extends Component {
     }
 
     render() {
-        const { handle_input, fields } = this.props;
+        const { handle_input, fields, errors } = this.props;
         const classification = "personal_info";
 
         return (
@@ -14,6 +14,7 @@ class PersonalInfo extends Component {
                 <h1>Personal Information</h1>
                 <form className="user_personal_info">
                     <input
+                        required
                         type="text"
                         placeholder="First name"
                         id="user_fstname"
@@ -21,8 +22,10 @@ class PersonalInfo extends Component {
                         onChange={(e) => handle_input(e, classification)}
                         value={fields.first_name}
                     ></input>
+                    <div className="error_msg">{errors.first_name}</div>
 
                     <input
+                        required
                         type="text"
                         placeholder="Last name"
                         id="user_scdname"
@@ -30,8 +33,10 @@ class PersonalInfo extends Component {
                         onChange={(e) => handle_input(e, classification)}
                         value={fields.last_name}
                     ></input>
+                    <div className="error_msg">{errors.last_name}</div>
 
                     <input
+                        required
                         type="email"
                         placeholder="Email"
                         id="user_email"
@@ -39,8 +44,10 @@ class PersonalInfo extends Component {
                         onChange={(e) => handle_input(e, classification)}
                         value={fields.email}
                     ></input>
+                    <div className="error_msg">{errors.email}</div>
 
                     <input
+                        required
                         type="tel"
                         placeholder="Phone number"
                         id="user_phone"
@@ -48,14 +55,17 @@ class PersonalInfo extends Component {
                         onChange={(e) => handle_input(e, classification)}
                         value={fields.phone_number}
                     ></input>
+                    <div className="error_msg">{errors.phone_number}</div>
 
                     <textarea
+                        required
                         id="user_intro"
                         placeholder="Introduce yourself"
                         name="introduction"
                         onChange={(e) => handle_input(e, classification)}
                         value={fields.introduction}
                     ></textarea>
+                    <div className="error_msg">{errors.introduction}</div>
                 </form>
             </div>
         );

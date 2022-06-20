@@ -50,3 +50,11 @@ form > * {
 #user_intro {
     resize: none;
 }
+
+.error_msg {
+    color: #cc0000;
+    margin-top: -9px;
+    margin-bottom: -6px;
+    font-size: 0.8rem;
+    user-select: none;
+}
