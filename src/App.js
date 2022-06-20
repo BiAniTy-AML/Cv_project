@@ -4,6 +4,7 @@ import "./styles/App.css";
 import PersonalInfo from "./components/PersonalInfo";
 import EducationalExp from "./components/EducationalExp";
 import PracticalExp from "./components/PracticalExp";
+import ModalCv from "./components/ModalCv";
 
 class App extends Component {
     constructor() {
@@ -13,6 +14,8 @@ class App extends Component {
         this.confirm_data = this.confirm_data.bind(this);
 
         this.state = {
+            modal_is_showing: false,
+            side_btn_text: "Confirm",
             errors: {},
             personal_info: {
                 first_name: "",
@@ -71,8 +74,17 @@ class App extends Component {
             errors,
         });
 
-        if (is_valid) {
+        if (is_valid && !this.state.modal_is_showing) {
             console.log("congrats!!!");
+            this.setState({
+                modal_is_showing: true,
+                side_btn_text: "Edit",
+            });
+        } else if (is_valid && this.state.modal_is_showing) {
+            this.setState({
+                modal_is_showing: false,
+                side_btn_text: "Confirm",
+            });
         }
     }
 
@@ -96,11 +108,19 @@ class App extends Component {
                 />
                 <button
                     type="submit"
-                    className="submit_btn"
+                    className="side_btn"
                     onClick={this.confirm_data}
                 >
-                    Confirm
+                    {this.state.side_btn_text}
                 </button>
+                <ModalCv
+                    is_showing={this.state.modal_is_showing}
+                    all_fields={{
+                        personal_info: this.state.personal_info,
+                        educational_experience: this.state.educational_exp,
+                        practical_experience: this.state.practical_exp,
+                    }}
+                />
             </div>
         );
     }
