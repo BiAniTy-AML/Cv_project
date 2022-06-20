@@ -25,7 +25,7 @@ class ModalEducationalExp extends Component {
                             {group.study_title}
                         </div>
 
-                        <div className="info_wrapper value_duration">
+                        <div className="info_wrapper value_duration_study">
                             <span>Duration: </span>
                             {group.es_start} - {group.es_end}
                         </div>

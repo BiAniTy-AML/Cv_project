@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ModalEducationalExp from "./ModalEducationalExp";
 import ModalPersonalInfo from "./ModalPersonalInfo";
+import ModalPracticalExp from "./ModalPracticalExp";
 
 class ModalCv extends Component {
     constructor(props) {
@@ -16,12 +17,17 @@ class ModalCv extends Component {
             return (
                 <div className="modal cv">
                     <div className="img_container">
-                        <img className="pfpic" src="" alt="" />
+                        <img
+                            className="pfpic"
+                            src="https://source.unsplash.com/random/500x300"
+                            alt=""
+                        />
                     </div>
 
                     <div className="input_values">
                         <ModalPersonalInfo group={personal_info} />
                         <ModalEducationalExp group={educational_experience} />
+                        <ModalPracticalExp group={practical_experience} />
                     </div>
                 </div>
             );

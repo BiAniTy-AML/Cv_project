@@ -77,18 +77,20 @@ form > * {
     border-radius: 15px;
     padding: 15px;
 
+    z-index: 10;
+    overflow: auto;
+
     position: fixed;
     top: 50%;
     left: 50%;
 
     transform: translate(-50%, -50%);
 
-    /* display: flex;
-    justify-content: space-between;
-    gap: 5%; */
+    /* display: grid;
+    grid-template-columns: 20% 80%; */
 
-    display: grid;
-    grid-template-columns: 20% 80%;
+    display: flex;
+    flex-flow: column nowrap;
 
     width: 80vw;
     height: calc(100vh + 1px);
@@ -101,18 +103,17 @@ form > * {
 
 .img_container {
     padding: 0 10px;
+    align-self: center;
 }
 
 .pfpic {
-    width: 100%;
-    height: 100%;
-    background: mistyrose;
+    border-radius: 10px;
 }
 
 .input_values {
     display: flex;
     flex-flow: column nowrap;
-    gap: 3%;
+    gap: 10px;
 }
 
 .info_wrapper {
@@ -134,10 +135,16 @@ form > * {
     box-shadow: 2px 2px 10px #222;
 }
 
-.personal_info .group_data {
+.personal_info .group_data,
+.educational_exp .group_data,
+.practical_exp .group_data {
     display: grid;
     gap: 20px;
     grid-template-columns: 50% 50%;
+}
+
+.value_duration_study {
+    grid-column: 1 / -1;
 }
 
 .value_email,
@@ -147,6 +154,11 @@ form > * {
 
 .value_intro {
     word-wrap: break-word;
+}
+
+.value_tasks,
+.value_duration_job {
+    grid-column: 1 / -1;
 }
 
 .group_section_header {
