@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ModalEducationalExp from "./ModalEducationalExp";
 import ModalPersonalInfo from "./ModalPersonalInfo";
 
 class ModalCv extends Component {
@@ -18,7 +19,10 @@ class ModalCv extends Component {
                         <img className="pfpic" src="" alt="" />
                     </div>
 
-                    <ModalPersonalInfo group={personal_info} />
+                    <div className="input_values">
+                        <ModalPersonalInfo group={personal_info} />
+                        <ModalEducationalExp group={educational_experience} />
+                    </div>
                 </div>
             );
     }

@@ -109,6 +109,12 @@ form > * {
     background: mistyrose;
 }
 
+.input_values {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 3%;
+}
+
 .info_wrapper {
     text-align: center;
 }
