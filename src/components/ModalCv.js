@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ModalPersonalInfo from "./ModalPersonalInfo";
 
 class ModalCv extends Component {
     constructor(props) {
@@ -17,56 +18,7 @@ class ModalCv extends Component {
                         <img className="pfpic" src="" alt="" />
                     </div>
 
-                    <section className="personal_info field_section">
-                        <div className="section_details">
-                            <div className="field_section_header">
-                                Personal Information
-                            </div>
-
-                            <div className="field_data">
-                                <div className="info_wrapper">
-                                    <div className="info_name">Full name:</div>
-                                    <div className="info_name_value">
-                                        {personal_info.first_name}{" "}
-                                        {personal_info.last_name}
-                                    </div>
-                                </div>
-
-                                <div className="info_wrapper">
-                                    <div className="info_email">
-                                        Email address:
-                                    </div>
-                                    <div className="info_email_value">
-                                        {personal_info.email}
-                                    </div>
-                                </div>
-
-                                <div className="info_wrapper">
-                                    <div className="info_phone">
-                                        Phone number:
-                                    </div>
-                                    <div
-                                        className="info_phone_value
-                                   "
-                                    >
-                                        {personal_info.phone_number}
-                                    </div>
-                                </div>
-
-                                <div className="info_wrapper">
-                                    <div className="info_intro">
-                                        Brief introduction:
-                                    </div>
-                                    <div
-                                        className="info_phone_value
-                                   "
-                                    >
-                                        {personal_info.introduction}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    <ModalPersonalInfo group={personal_info} />
                 </div>
             );
     }

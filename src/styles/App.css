@@ -110,26 +110,40 @@ form > * {
 }
 
 .info_wrapper {
-    display: flex;
-    gap: 1%;
-
     text-align: center;
+}
+
+.info_wrapper > span {
+    font-weight: bold;
 }
 
 .section_details {
     display: flex;
     flex-flow: column nowrap;
     gap: 15px;
-}
 
-.field_data {
     border: 2px solid gray;
     border-radius: 15px;
     padding: 10px 20px;
     box-shadow: 2px 2px 10px #222;
 }
 
-.field_section_header {
+.personal_info .group_data {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 50% 50%;
+}
+
+.value_email,
+.value_intro {
+    grid-column: 1 / -1;
+}
+
+.value_intro {
+    word-wrap: break-word;
+}
+
+.group_section_header {
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
