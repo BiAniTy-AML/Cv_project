@@ -6,60 +6,66 @@ class PracticalExp extends Component {
     }
 
     render() {
-        const { handle_input, fields } = this.props;
+        const { handle_input, fields, amount } = this.props;
         const classification = "practical_exp";
 
-        return (
-            <div className="pract_exp_container">
-                <h1>Practical Experience</h1>
-                <form className="user_pract_exp">
-                    <input
-                        type="text"
-                        placeholder="Company name"
-                        className="user_company"
-                        name="company"
-                        onChange={(e) => handle_input(e, classification)}
-                        value={fields.company}
-                    ></input>
+        const same_fields = [];
 
-                    <input
-                        type="text"
-                        placeholder="Position title"
-                        className="user_position"
-                        name="position"
-                        onChange={(e) => handle_input(e, classification)}
-                        value={fields.position}
-                    ></input>
+        for (let i = 0; i < amount; i++) {
+            same_fields.push(
+                <div className="pract_exp_container" key={i}>
+                    <h1>Practical Experience</h1>
+                    <form className="user_pract_exp">
+                        <input
+                            type="text"
+                            placeholder="Company name"
+                            className="user_company"
+                            name={`company${i}`}
+                            onChange={(e) => handle_input(e, classification)}
+                            value={fields[`company${i}`] || ""}
+                        ></input>
 
-                    <input
-                        type="text"
-                        placeholder="Main tasks done at the job"
-                        className="user_tasks"
-                        name="tasks"
-                        onChange={(e) => handle_input(e, classification)}
-                        value={fields.tasks}
-                    ></input>
+                        <input
+                            type="text"
+                            placeholder="Position title"
+                            className="user_position"
+                            name={`position${i}`}
+                            onChange={(e) => handle_input(e, classification)}
+                            value={fields[`position${i}`] || ""}
+                        ></input>
 
-                    <input
-                        type="text"
-                        placeholder="Start date"
-                        className="user_dtjob_start"
-                        name="pr_start"
-                        onChange={(e) => handle_input(e, classification)}
-                        value={fields.pr_start}
-                    ></input>
+                        <input
+                            type="text"
+                            placeholder="Main tasks done at the job"
+                            className="user_tasks"
+                            name={`tasks${i}`}
+                            onChange={(e) => handle_input(e, classification)}
+                            value={fields[`tasks${i}`] || ""}
+                        ></input>
 
-                    <input
-                        type="text"
-                        placeholder="End date"
-                        className="user_dtjob_end"
-                        name="pr_end"
-                        onChange={(e) => handle_input(e, classification)}
-                        value={fields.pr_end}
-                    ></input>
-                </form>
-            </div>
-        );
+                        <input
+                            type="text"
+                            placeholder="Start date"
+                            className="user_dtjob_start"
+                            name={`pr_start${i}`}
+                            onChange={(e) => handle_input(e, classification)}
+                            value={fields[`pr_start${i}`] || ""}
+                        ></input>
+
+                        <input
+                            type="text"
+                            placeholder="End date"
+                            className="user_dtjob_end"
+                            name={`pr_end${i}`}
+                            onChange={(e) => handle_input(e, classification)}
+                            value={fields[`pr_end${i}`] || ""}
+                        ></input>
+                    </form>
+                </div>
+            );
+        }
+
+        return <div>{same_fields}</div>;
     }
 }
 

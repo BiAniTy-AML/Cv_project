@@ -26,12 +26,12 @@ class App extends Component {
             },
             ed_exp_amount: 2,
             educational_exp: {
-                school_name0: "",
-                study_title0: "",
-                es_start0: "",
-                es_end0: "",
+                school_name: "",
+                study_title: "",
+                es_start: "",
+                es_end: "",
             },
-            pra_exp_amount: 1,
+            pra_exp_amount: 2,
             practical_exp: {
                 company: "",
                 position: "",
