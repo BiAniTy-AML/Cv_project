@@ -11,6 +11,7 @@ class App extends Component {
         super();
 
         this.handle_input = this.handle_input.bind(this);
+        this.change_amount = this.change_amount.bind(this);
         this.confirm_data = this.confirm_data.bind(this);
 
         this.state = {
@@ -24,14 +25,14 @@ class App extends Component {
                 phone_number: "",
                 introduction: "",
             },
-            ed_exp_amount: 2,
+            ed_exp_amount: 1,
             educational_exp: {
                 school_name: "",
                 study_title: "",
                 es_start: "",
                 es_end: "",
             },
-            pra_exp_amount: 2,
+            pra_exp_amount: 1,
             practical_exp: {
                 company: "",
                 position: "",
@@ -53,6 +54,29 @@ class App extends Component {
         this.setState({
             [classification]: fields,
         });
+    }
+
+    change_amount(classification, operation) {
+        if (!(operation === "+" || operation === "-")) return;
+        classification = `${classification}_amount`;
+
+        switch (operation) {
+            case "+":
+                this.setState({
+                    [classification]: this.state[classification] + 1,
+                });
+                break;
+
+            case "-":
+                if (this.state[classification] > 1)
+                    this.setState({
+                        [classification]: this.state[classification] - 1,
+                    });
+                break;
+
+            default:
+                break;
+        }
     }
 
     confirm_data(e) {
@@ -100,12 +124,14 @@ class App extends Component {
                 />
                 <EducationalExp
                     amount={this.state.ed_exp_amount}
+                    change_amount={this.change_amount}
                     handle_input={this.handle_input}
                     fields={this.state.educational_exp}
                     errors={this.state.errors}
                 />
                 <PracticalExp
                     amount={this.state.pra_exp_amount}
+                    change_amount={this.change_amount}
                     handle_input={this.handle_input}
                     fields={this.state.practical_exp}
                     errors={this.state.errors}

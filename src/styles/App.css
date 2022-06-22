@@ -26,10 +26,6 @@ body {
     border-bottom: 1px solid #b000b5;
 }
 
-.pract_exp_container {
-    margin-bottom: 20px;
-}
-
 #p_info_container > h1,
 .ed_exp_container > h1,
 .pract_exp_container > h1 {
@@ -88,9 +84,6 @@ form > * {
 
     transform: translate(-50%, -50%);
 
-    /* display: grid;
-    grid-template-columns: 20% 80%; */
-
     display: flex;
     flex-flow: column nowrap;
 
@@ -117,7 +110,7 @@ form > * {
 .input_values {
     display: flex;
     flex-flow: column nowrap;
-    gap: 10px;
+    gap: 25px;
 }
 
 .info_wrapper {
@@ -169,4 +162,43 @@ form > * {
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
+}
+
+.group_section {
+    display: flex;
+    flex-flow: column nowrap;
+    gap: 5px;
+}
+
+.all_edexp {
+    padding-bottom: 10px;
+}
+
+.form_options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+}
+
+.change_amount_btn {
+    padding: 5px 15px;
+    border: none;
+    margin-top: 5px;
+    border-radius: 15px;
+    cursor: pointer;
+
+    background: #280828;
+    border: 1px solid #b000b5;
+    color: mistyrose;
+}
+
+.change_amount_btn:hover {
+    background: #b000b5;
+    border: 1px solid #280828;
+    color: #280828;
+}
+
+.form_options:last-of-type {
+    margin-bottom: 20px;
 }

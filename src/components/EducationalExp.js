@@ -6,7 +6,7 @@ class EducationalExp extends Component {
     }
 
     render() {
-        const { handle_input, fields, amount } = this.props;
+        const { handle_input, fields, amount, change_amount } = this.props;
         const classification = "educational_exp";
 
         const same_fields = [];
@@ -56,7 +56,25 @@ class EducationalExp extends Component {
             );
         }
 
-        return <div>{same_fields}</div>;
+        return (
+            <div className="all_edxep">
+                {same_fields}
+                <div className="form_options">
+                    <button
+                        className="add_edexp change_amount_btn"
+                        onClick={() => change_amount("ed_exp", "+")}
+                    >
+                        Add
+                    </button>
+                    <button
+                        className="remove_exp change_amount_btn"
+                        onClick={() => change_amount("ed_exp", "-")}
+                    >
+                        Remove
+                    </button>
+                </div>
+            </div>
+        );
     }
 }
 

@@ -11,38 +11,39 @@ class ModalPracticalExp extends Component {
 
         for (let i = 0; i < amount; i++)
             same_fields.push(
-                <section className="practical_exp group_section">
-                    <div className="section_details">
-                        <div className="group_section_header">
-                            Practical Experience
+                <div className="section_details">
+                    <div className="group_section_header">
+                        Practical Experience
+                    </div>
+
+                    <div className="group_data">
+                        <div className="info_wrapper value_cmname">
+                            <span>Company name: </span>
+                            {group[`company${i}`]}
                         </div>
 
-                        <div className="group_data">
-                            <div className="info_wrapper value_cmname">
-                                <span>Company name: </span>
-                                {group[`company${i}`]}
-                            </div>
+                        <div className="info_wrapper value_position">
+                            <span>Position: </span>
+                            {group[`position${i}`]}
+                        </div>
 
-                            <div className="info_wrapper value_position">
-                                <span>Position: </span>
-                                {group[`position${i}`]}
-                            </div>
+                        <div className="info_wrapper value_tasks">
+                            <span>Tasks: </span>
+                            {group[`tasks${i}`]}
+                        </div>
 
-                            <div className="info_wrapper value_tasks">
-                                <span>Tasks: </span>
-                                {group[`tasks${i}`]}
-                            </div>
-
-                            <div className="info_wrapper value_duration_job">
-                                <span>Duration: </span>
-                                {group[`pr_start${i}`]} - {group[`pr_end${i}`]}
-                            </div>
+                        <div className="info_wrapper value_duration_job">
+                            <span>Duration: </span>
+                            {group[`pr_start${i}`]} - {group[`pr_end${i}`]}
                         </div>
                     </div>
-                </section>
+                </div>
             );
-
-        return <div>{same_fields} </div>;
+        return (
+            <section className="practical_exp group_section">
+                {same_fields}
+            </section>
+        );
     }
 }
 
