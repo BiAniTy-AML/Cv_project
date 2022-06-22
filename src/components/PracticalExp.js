@@ -10,7 +10,7 @@ class PracticalExp extends Component {
         const classification = "practical_exp";
 
         return (
-            <div id="pract_exp_container">
+            <div className="pract_exp_container">
                 <h1>Practical Experience</h1>
                 <form className="user_pract_exp">
                     <input

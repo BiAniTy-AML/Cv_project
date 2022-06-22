@@ -24,12 +24,14 @@ class App extends Component {
                 phone_number: "",
                 introduction: "",
             },
+            ed_exp_amount: 2,
             educational_exp: {
-                school_name: "",
-                study_title: "",
-                es_start: "",
-                es_end: "",
+                school_name0: "",
+                study_title0: "",
+                es_start0: "",
+                es_end0: "",
             },
+            pra_exp_amount: 1,
             practical_exp: {
                 company: "",
                 position: "",
@@ -97,11 +99,13 @@ class App extends Component {
                     errors={this.state.errors}
                 />
                 <EducationalExp
+                    amount={this.state.ed_exp_amount}
                     handle_input={this.handle_input}
                     fields={this.state.educational_exp}
                     errors={this.state.errors}
                 />
                 <PracticalExp
+                    amount={this.state.pra_exp_amount}
                     handle_input={this.handle_input}
                     fields={this.state.practical_exp}
                     errors={this.state.errors}
@@ -119,6 +123,10 @@ class App extends Component {
                         personal_info: this.state.personal_info,
                         educational_experience: this.state.educational_exp,
                         practical_experience: this.state.practical_exp,
+                    }}
+                    amounts={{
+                        ed_exp: this.state.ed_exp_amount,
+                        pra_exp: this.state.pra_exp_amount,
                     }}
                 />
             </div>
