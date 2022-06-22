@@ -6,7 +6,9 @@ class ModalPracticalExp extends Component {
     }
 
     render() {
+        // The group it belongs (educational_experience) and how many sections
         const { group, amount } = this.props;
+        // It is here to help in dynamically generating the sections
         const same_fields = [];
 
         for (let i = 0; i < amount; i++)
@@ -16,6 +18,7 @@ class ModalPracticalExp extends Component {
                         Practical Experience
                     </div>
 
+                    {/* Each div shows the information based on the "id" */}
                     <div className="group_data">
                         <div className="info_wrapper value_cmname">
                             <span>Company name: </span>

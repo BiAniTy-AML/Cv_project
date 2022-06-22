@@ -9,7 +9,11 @@ class ModalCv extends Component {
     }
 
     render() {
+        // Whether the modal is showing, all the sections inside the modal
+        // and how many of those sections
         const { is_showing, all_fields, amounts } = this.props;
+
+        // Separating all the sections
         const { personal_info, educational_experience, practical_experience } =
             all_fields;
 
@@ -26,7 +30,9 @@ class ModalCv extends Component {
                         />
                     </div>
 
+                    {/* Shows all the information saved */}
                     <div className="input_values">
+                        {/* The sections and how many of each */}
                         <ModalPersonalInfo group={personal_info} />
                         <ModalEducationalExp
                             group={educational_experience}

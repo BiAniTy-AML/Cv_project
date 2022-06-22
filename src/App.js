@@ -15,9 +15,13 @@ class App extends Component {
         this.confirm_data = this.confirm_data.bind(this);
 
         this.state = {
+            // Controls the modal display
             modal_is_showing: false,
+            // The text inside the side button
             side_btn_text: "Confirm",
+            // The errors when submiting the form - helps form validation
             errors: {},
+            // The first form section
             personal_info: {
                 first_name: "",
                 last_name: "",
@@ -25,7 +29,9 @@ class App extends Component {
                 phone_number: "",
                 introduction: "",
             },
+            // How many of that section are there
             ed_exp_amount: 1,
+            // The second form section
             educational_exp: {
                 school_name: "",
                 study_title: "",
@@ -33,6 +39,7 @@ class App extends Component {
                 es_end: "",
             },
             pra_exp_amount: 1,
+            // The third form section
             practical_exp: {
                 company: "",
                 position: "",
@@ -43,31 +50,40 @@ class App extends Component {
         };
     }
 
+    // Saves the user input in the state
     handle_input(e, classification) {
+        // What the user typed
         const value = e.target.value;
+        // What field was changed
         const input = e.target.name;
 
+        // Copies the fields from the state
         const fields = this.state[classification];
-
+        // Then adds a new key and value or change it if it already exists
         fields[input] = value;
 
+        // Save the changes to state
         this.setState({
             [classification]: fields,
         });
     }
 
+    // Adds or removes a form field
     change_amount(classification, operation) {
+        // Only + and - operations are allowed
         if (!(operation === "+" || operation === "-")) return;
         classification = `${classification}_amount`;
 
         switch (operation) {
             case "+":
+                // Adds 1 to the number of fields
                 this.setState({
                     [classification]: this.state[classification] + 1,
                 });
                 break;
 
             case "-":
+                // Subtracts 1 to the number of fields
                 if (this.state[classification] > 1)
                     this.setState({
                         [classification]: this.state[classification] - 1,
@@ -79,16 +95,21 @@ class App extends Component {
         }
     }
 
+    // Submits all form fields and validates them
+    // TODO: Implement and actual form validation
     confirm_data(e) {
         e.preventDefault();
 
+        // The sections to be validated
         const p_info = this.state.personal_info;
         const ed_exp = this.state.educational_exp;
         const pra_exp = this.state.practical_exp;
 
         let errors = {};
+        // Whether the form can be submited or not
         let is_valid = true;
 
+        // Guarantees that every input in the section is filled
         for (const field in p_info) {
             if (!p_info[field].trim()) {
                 is_valid = false;
@@ -96,12 +117,15 @@ class App extends Component {
             }
         }
 
+        // Saves the errors to the state
         this.setState({
             errors,
         });
 
+        // Only submits if the answers are valid
+        // After successfully submitting, open the modal, and
+        // if it is already opened, close it to allow editing
         if (is_valid && !this.state.modal_is_showing) {
-            console.log("congrats!!!");
             this.setState({
                 modal_is_showing: true,
                 side_btn_text: "Edit",
@@ -117,6 +141,7 @@ class App extends Component {
     render() {
         return (
             <div>
+                {/* All form sections */}
                 <PersonalInfo
                     handle_input={this.handle_input}
                     fields={this.state.personal_info}
@@ -136,6 +161,7 @@ class App extends Component {
                     fields={this.state.practical_exp}
                     errors={this.state.errors}
                 />
+
                 <button
                     type="submit"
                     className="side_btn"
@@ -143,6 +169,8 @@ class App extends Component {
                 >
                     {this.state.side_btn_text}
                 </button>
+
+                {/* The modal */}
                 <ModalCv
                     is_showing={this.state.modal_is_showing}
                     all_fields={{

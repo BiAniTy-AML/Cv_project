@@ -6,6 +6,7 @@ class ModalPersonalInfo extends Component {
     }
 
     render() {
+        // The group it belongs (personal_info)
         const { group } = this.props;
         return (
             <section className="personal_info group_section">

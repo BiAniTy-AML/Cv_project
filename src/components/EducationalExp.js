@@ -6,7 +6,10 @@ class EducationalExp extends Component {
     }
 
     render() {
+        // Function to save input, the form fields of the section,
+        // the amount of copy sections and function to add or remove the copied sections
         const { handle_input, fields, amount, change_amount } = this.props;
+        // The current section
         const classification = "educational_exp";
 
         const same_fields = [];
@@ -16,6 +19,7 @@ class EducationalExp extends Component {
                 <div className="ed_exp_container" key={i}>
                     <h1>Educational Experience</h1>
                     <form className="user_ed_exp">
+                        {/* Every input has a number on its value, which serves as and id when saving its content */}
                         <input
                             type="text"
                             placeholder="School name"
@@ -59,6 +63,8 @@ class EducationalExp extends Component {
         return (
             <div className="all_edxep">
                 {same_fields}
+
+                {/* All the equal sections and the buttons to add or remove them */}
                 <div className="form_options">
                     <button
                         className="add_edexp change_amount_btn"

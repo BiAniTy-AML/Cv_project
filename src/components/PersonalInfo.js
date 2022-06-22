@@ -6,13 +6,16 @@ class PersonalInfo extends Component {
     }
 
     render() {
+        // Function to save the user input, the form fields of each section and the form errors
         const { handle_input, fields, errors } = this.props;
+        // The current form section
         const classification = "personal_info";
 
         return (
             <div id="p_info_container">
                 <h1>Personal Information</h1>
                 <form className="user_personal_info">
+                    {/* Every input has the function to save its contents and an error div to display what went wrong */}
                     <input
                         required
                         type="text"

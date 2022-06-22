@@ -6,7 +6,10 @@ class PracticalExp extends Component {
     }
 
     render() {
+        // Function to save input, the form fields of the section,
+        // the amount of copy sections and function to add or remove the copied sections
         const { handle_input, fields, amount, change_amount } = this.props;
+        // The current section
         const classification = "practical_exp";
 
         const same_fields = [];
@@ -16,6 +19,7 @@ class PracticalExp extends Component {
                 <div className="pract_exp_container" key={i}>
                     <h1>Practical Experience</h1>
                     <form className="user_pract_exp">
+                        {/* Every input has a number on its value, which serves as and id when saving its content */}
                         <input
                             type="text"
                             placeholder="Company name"
@@ -69,6 +73,7 @@ class PracticalExp extends Component {
             <div className="all_prexp">
                 {same_fields}
 
+                {/* All the equal sections and the buttons to add or remove them */}
                 <div className="form_options">
                     <button
                         className="add_edexp change_amount_btn"
