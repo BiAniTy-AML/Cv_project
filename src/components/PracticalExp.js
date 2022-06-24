@@ -1,21 +1,19 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 
-class PracticalExp extends Component {
-    constructor(props) {
-        super(props);
-    }
+const PracticalExp = (props) => {
+    // Function to save input, the form fields of the section,
+    // the amount of copy sections and function to add or remove the copied sections
+    const { handle_input, fields, amount, change_amount } = props;
 
-    render() {
-        // Function to save input, the form fields of the section,
-        // the amount of copy sections and function to add or remove the copied sections
-        const { handle_input, fields, amount, change_amount } = this.props;
-        // The current section
-        const classification = "practical_exp";
+    const [same_sections, set_same_sections] = useState([]);
 
-        const same_fields = [];
+    // The current section
+    const classification = "practical_experience";
 
+    useEffect(() => {
+        const group = [];
         for (let i = 0; i < amount; i++) {
-            same_fields.push(
+            group.push(
                 <div className="pract_exp_container" key={i}>
                     <h1>Practical Experience</h1>
                     <form className="user_pract_exp">
@@ -67,30 +65,32 @@ class PracticalExp extends Component {
                     </form>
                 </div>
             );
+
+            set_same_sections(group);
         }
+    }, [amount, fields]);
 
-        return (
-            <div className="all_prexp">
-                {same_fields}
+    return (
+        <div className="all_prexp">
+            {same_sections}
 
-                {/* All the equal sections and the buttons to add or remove them */}
-                <div className="form_options">
-                    <button
-                        className="add_edexp change_amount_btn"
-                        onClick={() => change_amount("pra_exp", "+")}
-                    >
-                        Add
-                    </button>
-                    <button
-                        className="remove_exp change_amount_btn"
-                        onClick={() => change_amount("pra_exp", "-")}
-                    >
-                        Remove
-                    </button>
-                </div>
+            {/* All the equal sections and the buttons to add or remove them */}
+            <div className="form_options">
+                <button
+                    className="add_edexp change_amount_btn"
+                    onClick={() => change_amount(classification, "+", amount)}
+                >
+                    Add
+                </button>
+                <button
+                    className="remove_exp change_amount_btn"
+                    onClick={() => change_amount(classification, "-", amount)}
+                >
+                    Remove
+                </button>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default PracticalExp;

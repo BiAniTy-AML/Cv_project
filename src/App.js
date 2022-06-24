@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import uniqid from "uniqid";
 import "./styles/App.css";
 import PersonalInfo from "./components/PersonalInfo";
@@ -6,104 +6,107 @@ import EducationalExp from "./components/EducationalExp";
 import PracticalExp from "./components/PracticalExp";
 import ModalCv from "./components/ModalCv";
 
-class App extends Component {
-    constructor() {
-        super();
+const App = () => {
+    // Controls the modal display
+    const [modal_showing, set_modal_showing] = useState(false);
 
-        this.handle_input = this.handle_input.bind(this);
-        this.change_amount = this.change_amount.bind(this);
-        this.confirm_data = this.confirm_data.bind(this);
+    // The text inside the side button
+    const [side_btn_txt, set_side_btn_txt] = useState("Confirm");
 
-        this.state = {
-            // Controls the modal display
-            modal_is_showing: false,
-            // The text inside the side button
-            side_btn_text: "Confirm",
-            // The errors when submiting the form - helps form validation
-            errors: {},
-            // The first form section
-            personal_info: {
-                first_name: "",
-                last_name: "",
-                email: "",
-                phone_number: "",
-                introduction: "",
-            },
-            // How many of that section are there
-            ed_exp_amount: 1,
-            // The second form section
-            educational_exp: {
-                school_name: "",
-                study_title: "",
-                es_start: "",
-                es_end: "",
-            },
-            pra_exp_amount: 1,
-            // The third form section
-            practical_exp: {
-                company: "",
-                position: "",
-                tasks: "",
-                pr_start: "",
-                pr_end: "",
-            },
-        };
-    }
+    // The errors when submiting the form - helps form validation
+    const [form_errors, set_form_errors] = useState({});
+
+    // The first form section
+    const [personal_info, set_personal_info] = useState({
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone_number: "",
+        introduction: "",
+    });
+
+    // The second form section
+    const [educational_experience, set_educational_experience] = useState({
+        school_name: "",
+        study_title: "",
+        es_start: "",
+        es_end: "",
+    });
+    const [educational_experience_amount, set_educational_experience_amount] =
+        useState(1);
+
+    // The third form section
+    const [practical_experience, set_practical_experience] = useState({
+        company: "",
+        position: "",
+        tasks: "",
+        pr_start: "",
+        pr_end: "",
+    });
+    const [practical_experience_amount, set_practical_experience_amount] =
+        useState(1);
+
+    // Helps dinamically use set state
+    const set_fields = {
+        personal_info: set_personal_info,
+        educational_experience: set_educational_experience,
+        practical_experience: set_practical_experience,
+    };
 
     // Saves the user input in the state
-    handle_input(e, classification) {
-        // What the user typed
-        const value = e.target.value;
+    const handle_input = (e, classification) => {
         // What field was changed
-        const input = e.target.name;
+        // What the user typed
+        const { value, name } = e.target;
 
-        // Copies the fields from the state
-        const fields = this.state[classification];
-        // Then adds a new key and value or change it if it already exists
-        fields[input] = value;
+        const set_funtion = set_fields[classification];
 
-        // Save the changes to state
-        this.setState({
-            [classification]: fields,
+        set_funtion((prev_state) => {
+            return {
+                ...prev_state,
+                [name]: value,
+            };
         });
-    }
+    };
 
-    // Adds or removes a form field
-    change_amount(classification, operation) {
+    // Helps dinamically use set state
+    const set_amounts = {
+        practical_experience: set_practical_experience_amount,
+        educational_experience: set_educational_experience_amount,
+    };
+
+    // Adds or removes a similar form section
+    const change_amount = (classification, operation, amount) => {
         // Only + and - operations are allowed
         if (!(operation === "+" || operation === "-")) return;
-        classification = `${classification}_amount`;
+
+        const set_funtion = set_amounts[classification];
 
         switch (operation) {
             case "+":
                 // Adds 1 to the number of fields
-                this.setState({
-                    [classification]: this.state[classification] + 1,
-                });
+                set_funtion((prev_amount) => prev_amount + 1);
                 break;
 
             case "-":
                 // Subtracts 1 to the number of fields
-                if (this.state[classification] > 1)
-                    this.setState({
-                        [classification]: this.state[classification] - 1,
-                    });
+                if (amount > 1) set_funtion((prev_amount) => prev_amount - 1);
                 break;
 
             default:
                 break;
         }
-    }
+    };
 
     // Submits all form fields and validates them
     // TODO: Implement and actual form validation
-    confirm_data(e) {
+    const confirm_data = (e) => {
         e.preventDefault();
 
         // The sections to be validated
-        const p_info = this.state.personal_info;
-        const ed_exp = this.state.educational_exp;
-        const pra_exp = this.state.practical_exp;
+        const p_info = personal_info;
+        const ed_exp = educational_experience;
+        const pra_exp = practical_experience;
 
         let errors = {};
         // Whether the form can be submited or not
@@ -118,74 +121,62 @@ class App extends Component {
         }
 
         // Saves the errors to the state
-        this.setState({
-            errors,
-        });
+        set_form_errors(errors);
 
         // Only submits if the answers are valid
         // After successfully submitting, open the modal, and
         // if it is already opened, close it to allow editing
-        if (is_valid && !this.state.modal_is_showing) {
-            this.setState({
-                modal_is_showing: true,
-                side_btn_text: "Edit",
-            });
-        } else if (is_valid && this.state.modal_is_showing) {
-            this.setState({
-                modal_is_showing: false,
-                side_btn_text: "Confirm",
-            });
+        if (is_valid && !modal_showing) {
+            set_modal_showing(true);
+            set_side_btn_txt("Edit");
+        } else if (is_valid && modal_showing) {
+            set_modal_showing(false);
+            set_side_btn_txt("Confirm");
         }
-    }
+    };
 
-    render() {
-        return (
-            <div>
-                {/* All form sections */}
-                <PersonalInfo
-                    handle_input={this.handle_input}
-                    fields={this.state.personal_info}
-                    errors={this.state.errors}
-                />
-                <EducationalExp
-                    amount={this.state.ed_exp_amount}
-                    change_amount={this.change_amount}
-                    handle_input={this.handle_input}
-                    fields={this.state.educational_exp}
-                    errors={this.state.errors}
-                />
-                <PracticalExp
-                    amount={this.state.pra_exp_amount}
-                    change_amount={this.change_amount}
-                    handle_input={this.handle_input}
-                    fields={this.state.practical_exp}
-                    errors={this.state.errors}
-                />
+    return (
+        <div>
+            {/* All form sections */}
+            <PersonalInfo
+                fields={educational_experience}
+                handle_input={handle_input}
+                errors={form_errors}
+            />
+            <EducationalExp
+                fields={educational_experience}
+                amount={educational_experience_amount}
+                handle_input={handle_input}
+                change_amount={change_amount}
+                errors={form_errors}
+            />
+            <PracticalExp
+                fields={practical_experience}
+                amount={practical_experience_amount}
+                handle_input={handle_input}
+                change_amount={change_amount}
+                errors={form_errors}
+            />
 
-                <button
-                    type="submit"
-                    className="side_btn"
-                    onClick={this.confirm_data}
-                >
-                    {this.state.side_btn_text}
-                </button>
+            <button type="submit" className="side_btn" onClick={confirm_data}>
+                {side_btn_txt}
+            </button>
 
-                {/* The modal */}
-                <ModalCv
-                    is_showing={this.state.modal_is_showing}
-                    all_fields={{
-                        personal_info: this.state.personal_info,
-                        educational_experience: this.state.educational_exp,
-                        practical_experience: this.state.practical_exp,
-                    }}
-                    amounts={{
-                        ed_exp: this.state.ed_exp_amount,
-                        pra_exp: this.state.pra_exp_amount,
-                    }}
-                />
-            </div>
-        );
-    }
-}
+            {/* The modal */}
+            <ModalCv
+                is_showing={modal_showing}
+                all_fields={{
+                    personal_info,
+                    educational_experience,
+                    practical_experience,
+                }}
+                amounts={{
+                    ed_exp: educational_experience_amount,
+                    pra_exp: practical_experience_amount,
+                }}
+            />
+        </div>
+    );
+};
 
 export default App;
